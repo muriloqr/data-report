@@ -14,8 +14,13 @@ public class DataExecutor {
 	private DataWriter dataWriter = new DataWriter();
 	
 	public void execute() {
-		Stream<String> readData = dataReader.readData();
-		ReportModel reportOfData = dataReportConverter.convert(readData);
-		dataWriter.writeData(dataReportConverter.convertToString(reportOfData));
+		try {
+			Stream<String> readData = dataReader.readData();
+			ReportModel reportOfData = dataReportConverter.convert(readData);
+			dataWriter.writeData(dataReportConverter.convertToString(reportOfData));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

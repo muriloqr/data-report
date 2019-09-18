@@ -16,8 +16,12 @@ public class DataReader {
 	private static final String CHARSET_NAME = "ISO-8859-1";
 	
 	
-	public Stream<String> readData() {
+	public Stream<String> readData() throws Exception {
 		List<String> lines = new ArrayList<String>();
+		
+		if (getFilesPaths().count() == 0) {
+			throw new Exception("Não há arquivos na pasta " + READ_DIR);
+		}
 		
 		getFilesPaths().forEach(path -> {
 			List<String> pathLines = getLines(path).collect(Collectors.toList());
